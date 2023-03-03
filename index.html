@@ -3,25 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Title</title>
+    <title>Odin Resource Project</title>
     <meta name="description" content="Description of the page for search engines">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="site-header">
-        <nav class="main-nav">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
+        <ul class="header__list">
+            <li class="header__item"><a href="#" class="header__link">Rating</a></li>
+            <li class="header__item"><a href="#" class="header__link">Resource</a></li>
+            <li class="header__item"><a href="#" class="header__link">Type</a></li>
+            <li class="header__item"><a href="#" class="header__link">Status</a></li>
+        </ul>
     </header>
     <main class="site-main">
-        <h1>Page Heading</h1>
-        <p>Page content goes here.</p>
+        <nav class="main__nav"><h1>Programming Resources</h1>
+            <ul class="main__list">
+                <li class="main__item main__item--checkbox">
+                    <label class="main__label">
+                        <input type="range" name="rating" min="0" max="100" value="50" class="main__range">
+                        Rating
+                      </label>                      
+                </li>
+                <li class="main__item"><a href="#" class="main__link">Resource</a></li>
+                <li class="main__item"><a href="#" class="main__link">Type</a></li>
+                <li class="main__item"><a href="#" class="main__link">Status</a></li>
+                <li class="main__item"><a href="#" class="main__link">Completion</a></li>
+                <li class="main__item"><a href="#" class="main__link">Start Date</a></li>
+                <li class="main__item"><a href="#" class="main__link">Finish Date</a></li>
+                <li class="main__item"><a href="#" class="main__link">Notes</a></li>
+                <i class="fas fa-edit icon--edit"></i>
+                <i class="fas fa-trash icon--delete"></i>
+            </ul>
+        </nav>
     </main>
+    
     <footer class="site-footer">
        <p>2023 Company Name</p>
     </footer>
