@@ -1,7 +1,7 @@
 "use strict";
 
-const range = document.querySelector('.main__range');
-const progressBar = document.querySelector('.main__progress');
+const range = document.querySelector(".main__range");
+const progressBar = document.querySelector(".main__progress");
 
 let myLibrary = [];
 
@@ -12,37 +12,23 @@ const STATUS = {
   COMPLETED: "completed",
 };
 
-// Define ResourceList class
-class ResourceList {
-  constructor(
-    resource = "",
-    type = "",
-    status = STATUS.PENDING,
-    completion = 0,
-    startDate = "",
-    finishDate = "",
-    notes = ""
-  ) {
-    this.resource = resource;
-    this.type = type;
-    this.status = status;
-    this.completion = completion;
-    this.startDate = startDate;
-    this.finishDate = finishDate;
-    this.notes = notes;
-  }
-
-  // Function to update the status of a resource
-  updateStatus(newStatus) {
+// Define resourceList object
+const resourceList = {
+  resource: "",
+  type: "",
+  status: STATUS.PENDING,
+  completion: 0,
+  startDate: "",
+  finishDate: "",
+  notes: "",
+  updateStatus: function (newStatus) {
     if (Object.values(STATUS).includes(newStatus)) {
       this.status = newStatus;
     } else {
       throw new Error("Invalid status");
     }
-  }
-
-  // Function to get the completion percentage of a resource
-  getCompletionProgressBar() {
+  },
+  getCompletionProgressBar: function () {
     const percentage = this.completion;
     let color;
     if (percentage >= 70) {
@@ -52,20 +38,24 @@ class ResourceList {
     } else {
       color = "yellow";
     }
-    return `<div class="progress-bar" style="width: ${percentage}%; background-color: ${color};"></div>`;
-  }
-}
+    return (
+      <div
+        class="progress-bar"
+        style="width: ${percentage}%; background-color: ${color};"
+      ></div>
+    );
+  },
+};
 
 // Example usage
-const resource1 = new ResourceList(
-  "JavaScript",
-  "Tutorial",
-  STATUS.IN_PROGRESS,
-  50,
-  "2023-02-28",
-  "",
-  "Some notes"
-);
+const resource1 = Object.create(resourceList);
+resource1.resource = "JavaScript";
+resource1.type = "Tutorial";
+resource1.status = STATUS.IN_PROGRESS;
+resource1.completion = 50;
+resource1.startDate = "2023-02-28";
+resource1.finishDate = "";
+resource1.notes = "Some notes";
 
 // Will Create a library in which you can sort and  add, delete, rate, percentage completed, Date Started,, notes
 
