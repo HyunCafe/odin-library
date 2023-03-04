@@ -1,6 +1,8 @@
 "use strict";
 
 // Variables
+const submitBtn = document.querySelector('button[type="submit"]');
+
 const rating = this.rating;
 let color;
 let myLibrary = [];
@@ -13,31 +15,43 @@ const STATUS = {
   COMPLETED: "completed",
 };
 
-// Define resourceList object
-const resourceList = {
-  resource: "",
-  category: "",
-  status: STATUS.PENDING,
-  completion: 0,
-  startDate: "",
-  finishDate: "",
-  notes: "",
-  rating: 0,
-  updateStatus: function (newStatus) {
+// Define Resource constructor function
+function Resource(
+  resource,
+  category,
+  status,
+  progress,
+  startDate,
+  finishDate,
+  notes,
+  rating
+) {
+  this.resource = resource;
+  this.category = category;
+  this.status = status || STATUS.PENDING;
+  this.progress = progress || 0;
+  this.startDate = startDate || "";
+  this.finishDate = finishDate || "";
+  this.notes = notes || "";
+  this.rating = rating || 0;
+
+  this.updateStatus = function (newStatus) {
     if (Object.values(STATUS).includes(newStatus)) {
       this.status = newStatus;
     } else {
       throw new Error("Invalid status");
     }
-  },
-  handleRatingChange: function (event) {
+  };
+
+  this.handleRatingChange = function (event) {
     const newRating = parseInt(event.target.value);
     if (isNaN(newRating) || newRating < 1 || newRating > 10) {
       throw new Error("Invalid rating");
     }
     this.rating = newRating;
-  },
-  getRatingInput: function() {
+  };
+
+  this.getRatingInput = function () {
     let color;
     if (this.rating >= 7) {
       color = "green";
@@ -48,30 +62,33 @@ const resourceList = {
     }
     return (
       <div class="rating-bar">
-        <input 
-          type="number" 
-          min="1" 
-          max="10" 
-          step="1" 
-          value={this.rating} 
-          onChange={this.handleRatingChange} 
+        <input
+          type="number"
+          min="1"
+          max="10"
+          step="1"
+          value={this.rating}
+          onChange={this.handleRatingChange}
           style={{ backgroundColor: color }}
         />
       </div>
     );
-  },
-};
-
+  };
+}
 
 // Example usage
-const resource1 = Object.create(resourceList);
-resource1.resource = "JavaScript";
-resource1.category = "Tutorial";
-resource1.status = STATUS.IN_PROGRESS;
-resource1.completion = 50;
-resource1.startDate = "2023-02-28";
-resource1.finishDate = "";
-resource1.notes = "Some notes";
+const resource1 = new Resource(
+  "JavaScript",
+  "coding-challenge",
+  STATUS.IN_PROGRESS,
+  50,
+  "2023-02-28",
+  "",
+  "Some notes",
+  8
+);
+
+// Submit Form Logic
 
 // Will Create a library in which you can sort and  add, delete, rate, percentage completed, Date Started,, notes
 
