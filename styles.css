@@ -48,7 +48,6 @@
   
   .main__item {
     display: flex;
-
   }
 
   .main__item:nth-child(2) {
