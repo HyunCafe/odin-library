@@ -35,15 +35,13 @@
             </ul>
         </nav>
 
-        <!-- have Rating, Status, End Date, and Notes editable -->
-
+        <!-- Add New Resource -->
+             <!-- have Rating, Status, End Date, and Notes editable -->
         <form class="resource-form">
-            <label for="text-input">Enter text:</label>
-            <input type="text" id="text-input" name="text">
-            
+            <label for="text-input">Enter Resource:</label>
+            <input type="text" id="text-input" name="resource" required>
             <label for="url-input">Enter URL:</label>
             <input type="text" id="url-input" name="url" placeholder="Optional">
-
             <label for="category-input">Category:</label>
             <select id="category">
                 <option value="">Select a category</option>
@@ -54,25 +52,18 @@
                 <option value="video">Video</option>
                 <option value="other">Other</option>
               </select>
-              
             <label for="start-date-input">Start Date:</label>
             <input type="date" id="start-date-input" name="start-date">
-
             <label for="end-date-input">End Date:</label>
             <input type="date" id="end-date-input" name="end-date">
-          
             <label for="notes-input">Notes:</label>
             <textarea id="notes-input" name="notes"></textarea>
-
             <label for="rating-input">Rating:</label>
             <input type="number" id="rating-input" name="rating" min="1" max="10" placeholder="Rating from 1-10"> 
-            
             <button type="submit">Add Resource</button>
           </form>
-          
-
-
     </main>
+
     <!-- will add recycle and restore bin -->
 
     <footer class="site-footer">
