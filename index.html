@@ -20,28 +20,61 @@
     <main class="site-main">
         <nav class="main__nav"><h1>Programming Resources</h1>
             <ul class="main__list">
-                <li class="main__item main__item--checkbox">
-                    <label class="main__label">
-                        Rating:
-                        <input type="range" class="main__range" min="0" max="100" value="50">
-                        <div class="main__progress-bar">
-                          <div class="main__progress" style="width: 50%"></div>
-                        </div>
-                      </label>                                                         
-                </li>
+                <li class="main__item"><a href="#" class="main__link">Rating</a></li>
                 <li class="main__item"><a href="#" class="main__link">Resource</a></li>
-                <li class="main__item"><a href="#" class="main__link">Type</a></li>
+                <li class="main__item"><a href="#" class="main__link">Category</a></li>
                 <li class="main__item"><a href="#" class="main__link">Status</a></li>
-                <li class="main__item"><a href="#" class="main__link">Completion</a></li>
+                <li class="main__item"><a href="#" class="main__link">Progress</a></li>
                 <li class="main__item"><a href="#" class="main__link">Start Date</a></li>
-                <li class="main__item"><a href="#" class="main__link">Finish Date</a></li>
+                <li class="main__item"><a href="#" class="main__link">End Date</a></li>
                 <li class="main__item"><a href="#" class="main__link">Notes</a></li>
-                <i class="fas fa-edit icon--edit"></i>
-                <i class="fas fa-trash icon--delete"></i>
+                <li class="main__item"><a href="#" class="main__link">Options</a>       
+                    <!-- will have these icons display below options         -->
+                     <i class="fas fa-edit icon--edit">Edit</i>
+                <i class="fas fa-trash icon--delete">Delete</i></li>
             </ul>
         </nav>
+
+        <!-- have Rating, Status, End Date, and Notes editable -->
+
+        <form class="resource-form">
+            <label for="text-input">Enter text:</label>
+            <input type="text" id="text-input" name="text">
+            
+            <label for="url-input">Enter URL:</label>
+            <input type="text" id="url-input" name="url" placeholder="Optional">
+
+            <label for="category-input">Category:</label>
+            <select id="category">
+                <option value="">Select a category</option>
+                <option value="online-course">Online Courses</option>
+                <option value="cheat-sheet">Cheat Sheets</option>
+                <option value="coding-tool">Coding Tools</option>
+                <option value="coding-challenge">Coding Challenges</option>
+                <option value="video">Video</option>
+                <option value="other">Other</option>
+              </select>
+              
+            <label for="start-date-input">Start Date:</label>
+            <input type="date" id="start-date-input" name="start-date">
+
+            <label for="end-date-input">End Date:</label>
+            <input type="date" id="end-date-input" name="end-date">
+          
+            <label for="notes-input">Notes:</label>
+            <textarea id="notes-input" name="notes"></textarea>
+
+            <label for="rating-input">Rating:</label>
+            <input type="number" id="rating-input" name="rating" min="1" max="10" placeholder="Rating from 1-10"> 
+            
+            <button type="submit">Add Resource</button>
+          </form>
+          
+
+
     </main>
-    
+    <!-- will add recycle and restore bin -->
+
     <footer class="site-footer">
        <p>Github HyunCafe</p>
     </footer>

@@ -3,12 +3,20 @@
     list-style: none;
   }
   
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+
   /* Header Navbar */
   .site-header {
     display: flex;
     justify-content: space-around;
     color: #fff;
     padding: 1em;
+    margin: 8em 0 4em 0;
     border: 2px red solid;
   }
   
@@ -18,48 +26,53 @@
   }
   
   .header__item {
+    margin: 0 2em;
   }
   
   /* Main Section */
   .site-main {
-    display: flex;
     min-height: 100vh; 
+
   }
 
+  .main__nav {
+    text-align: center;
+  }
 
   .main__list {
+    display: flex;
     justify-content: space-between;
+    border: 2px red solid;
+    width: 90em;
   }
   
   .main__item {
     display: flex;
+
+  }
+
+  .main__item:nth-child(2) {
+    flex-grow: 4;
+  }
+  
+  .main__item:not(:nth-child(2)) {
+    flex-grow: 1;
   }
   
   .main__link {
     display: flex;
     justify-content: center;
     padding: 10px;
-    background-color: #eee;
-    border-radius: 5px;
   }
-  
-  .main__range {
-    width: 100%;
+ 
+  /* User Submit Option */
+  .resource-form {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
   }
-  
-  .main__progress-bar {
-    height: .5em;
-    margin-top: .5em;
-    background-color: #ddd;
-    border-radius: 5px;
-  }
-  
-  .main__progress {
-    height: 100%;
-    background-color: #4caf50;
-    border-radius: 5px;
-  }
-  
+
+
   /* Footer */
   .site-footer {
     padding: 10px;
