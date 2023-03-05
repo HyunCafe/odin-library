@@ -66,7 +66,7 @@ function Resource(
     } else {
       color = "yellow";
     }
-    input.style.backgroundColor = color;
+    input.style.color = color;
 
     div.appendChild(input);
     return div;
@@ -141,29 +141,52 @@ function createResourceDisplay(resource, index) {
   resourceRow.classList.add("resource-row");
   resourceRow.dataset.index = index;
 
-  const resourceProps = [    ["rating", "rating"],
+  const resourceProps = [
+    ["rating", "rating"],
     ["resource", "resource"],
     ["category", "category"],
     ["status", "status"],
     ["startDate", "start-date"],
-    ["endDate", "end-date"],
+    ["finishDate", "finish-date"],
     ["notes", "notes"],
+    ["options", "options"],
   ];
-  
-  resourceProps.forEach(([propName, className]) => {
-    const propElement = document.createElement("td");
-    propElement.classList.add(className);
-    propElement.textContent = resource[propName];
-    resourceRow.appendChild(propElement);
-  });
 
   const ratingElement = resource.getRatingInput();
   const ratingCell = document.createElement("td");
   ratingCell.appendChild(ratingElement);
   resourceRow.appendChild(ratingCell);
 
+  resourceProps.forEach(([propName, className]) => {
+    const propElement = document.createElement("td");
+    propElement.classList.add(className);
+    if (propName === "rating") {
+      propElement.style.display = "none";
+    } else {
+      propElement.textContent = resource[propName];
+    }
+    resourceRow.appendChild(propElement);
+  });
+
   return resourceRow;
 }
+
+// Add default test case
+const defaultResource = new Resource(
+  "The Odin Project",
+  "Online Course",
+  "In Progress",
+  "2022-12-15",
+  "",
+  "No Hand Holding, Great Resource",
+  9
+);
+myLibrary.push(defaultResource);
+const defaultResourceDisplay = createResourceDisplay(
+  defaultResource,
+  myLibrary.length - 1
+);
+resourceList.appendChild(defaultResourceDisplay);
 
 // Sort Option For Different Categories
 
