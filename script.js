@@ -1,10 +1,5 @@
 "use strict";
 
-// Variables
-const input = document.createElement("input");
-const div = document.createElement("div");
-let color;
-
 const myLibrary = [];
 
 // Constants
@@ -20,18 +15,16 @@ function Resource(
   resource,
   category,
   status,
-  progress,
   startDate,
-  finishDate,
+  endDate,
   notes,
   rating
 ) {
   this.resource = resource;
   this.category = category;
   this.status = status || STATUS.PENDING;
-  this.progress = progress || 0;
   this.startDate = startDate || "";
-  this.finishDate = finishDate || "";
+  this.endDate = endDate || "";
   this.notes = notes || "";
   this.rating = rating || 0;
 
@@ -53,8 +46,19 @@ function Resource(
     this.rating = newRating;
   };
 
-  // Method to get rating input element
   this.getRatingInput = function () {
+    const div = document.createElement("div");
+    div.classList.add("rating-bar");
+
+    const input = document.createElement("input");
+    input.setAttribute("type", "number");
+    input.setAttribute("min", "1");
+    input.setAttribute("max", "10");
+    input.setAttribute("step", "1");
+    input.value = this.rating;
+    input.addEventListener("change", this.handleRatingChange);
+
+    let color;
     if (this.rating >= 7) {
       color = "green";
     } else if (this.rating >= 2) {
@@ -62,139 +66,104 @@ function Resource(
     } else {
       color = "yellow";
     }
-    div.classList.add("rating-bar");
-    input.setAttribute("type", "number");
-    input.setAttribute("min", "1");
-    input.setAttribute("max", "10");
-    input.setAttribute("step", "1");
-    input.value = this.rating;
-    input.addEventListener("change", this.handleRatingChange);
     input.style.backgroundColor = color;
+
     div.appendChild(input);
     return div;
   };
 }
 
-// Define example resource object
-const exampleResource = new Resource(
-  "Example Resource",
-  "Online Courses",
-  STATUS.IN_PROGRESS,
-  50,
-  "2022-01-01",
-  "",
-  "Some notes",
-  8
-);
-
-// Add the example to lib array
-myLibrary.push(exampleResource);
-
 // Submit Form Logic
 const submitBtn = document.querySelector('button[type="submit"]');
 const form = document.querySelector(".resource-form");
+const resourceList = document.querySelector(".resource-list");
 
-function submissionForm() {
-  submitBtn.addEventListener("click", () => {
-    const resource = document.getElementById("text-input").value;
-    const category = document.getElementById("category").value;
-    const status = document.getElementById("status").value;
-    const progress = document.getElementById("progress").value;
-    const startDate = document.getElementById("start-date-input").value;
-    const finishDate = document.getElementById("end-date-input").value;
-    const notes = document.getElementById("notes-input").value;
-    const rating = document.getElementById("rating-input").value;
-
-    const newResource = new Resource(
-      resource,
-      category,
-      status,
-      progress,
-      startDate,
-      finishDate,
-      notes,
-      rating
-    );
-
-    let resources = JSON.parse(localStorage.getItem("resources")) || [];
-    resources.push(newResource);
-    localStorage.setItem("resources", JSON.stringify(resources));
-  });
-}
-
-form.addEventListener("submit", function (event) {
-  event.preventDefault(); // prevent default form submit behavior
-
-  // get form values
-  const resource = document.getElementById("text-input").value;
-  const url = document.getElementById("url-input").value;
-  const category = document.getElementById("category").value;
-  const startDate = document.getElementById("start-date-input").value;
-  const finishDate = document.getElementById("end-date-input").value;
-  const notes = document.getElementById("notes-input").value;
-  const rating = document.getElementById("rating-input").value;
-
-  // create new Resource object
-  const newResource = new Resource(
-    resource,
-    category,
-    STATUS.PENDING,
-    0,
-    startDate,
-    finishDate,
-    notes,
-    rating
+function updateResourceFromForm(index) {
+  const resourceContainer = document.querySelector(`[data-index="${index}"]`);
+  const resourceInputs = Array.from(
+    resourceContainer.querySelectorAll("input, select")
   );
-  myLibrary.push(newResource);
+  const resourceValues = resourceInputs.reduce((values, input) => {
+    const key = input.id.replace("-input", "");
+    values[key] = input.value;
+    return values;
+  }, {});
+
+  const currentResource = myLibrary[index];
+  Object.assign(currentResource, resourceValues);
   saveLibraryToLocalStorage();
-  const resourceDisplay = createResourceDisplay(newResource);
-  resourceListEl.appendChild(resourceDisplay);
-  form.reset();
-});
+}
 
 // Save to localStorage
 function saveLibraryToLocalStorage() {
-  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
 }
 
+submitBtn.addEventListener("click", (event) => {
+  event.preventDefault();
 
-// Display New Submissions
-function createResourceDisplay(resource) {
-  const resourceElement = document.createElement("div");
-  resourceElement.classList.add("resource");
+  // get form values
+  const resource = document.getElementById("resource-input").value;
+  const category = document.getElementById("category-input").value;
+  const status = document.getElementById("status-input").value;
+  const startDate = document.getElementById("start-date-input").value;
+  const endDate = document.getElementById("end-date-input").value;
+  const notes = document.getElementById("notes-input").value;
+  const rating = document.getElementById("rating-input").value;
 
-  const titleElement = document.createElement("p");
-  titleElement.textContent = resource.resource;
-  resourceElement.appendChild(titleElement);
+  // create Resource object
+  const newResource = new Resource(
+    resource,
+    category,
+    status,
+    startDate,
+    endDate,
+    notes,
+    rating
+  );
 
-  const categoryElement = document.createElement("p");
-  categoryElement.textContent = `Category: ${resource.category}`;
-  resourceElement.appendChild(categoryElement);
+  // add Resource object to myLibrary array and update display
+  myLibrary.push(newResource);
+  saveLibraryToLocalStorage();
+  const resourceDisplay = createResourceDisplay(
+    newResource,
+    myLibrary.length - 1
+  );
+  resourceList.appendChild(resourceDisplay);
 
-  const statusElement = document.createElement("p");
-  statusElement.textContent = `Status: ${resource.status}`;
-  resourceElement.appendChild(statusElement);
+  // reset form values
+  form.reset();
+});
 
-  const progressElement = document.createElement("p");
-  progressElement.textContent = `Progress: ${resource.progress}%`;
-  resourceElement.appendChild(progressElement);
+// Create the resource display and populate it in correct columns
+function createResourceDisplay(resource, index) {
+  const resourceRow = document.createElement("tr");
+  resourceRow.classList.add("resource-row");
+  resourceRow.dataset.index = index;
 
-  const startDateElement = document.createElement("p");
-  startDateElement.textContent = `Start Date: ${resource.startDate}`;
-  resourceElement.appendChild(startDateElement);
+  const resourceProps = [
+    ["resource", "resource"],
+    ["category", "category"],
+    ["status", "status"],
+    ["progress", "progress"],
+    ["startDate", "start-date"],
+    ["finishDate", "finish-date"],
+    ["notes", "notes"],
+  ];
 
-  const finishDateElement = document.createElement("p");
-  finishDateElement.textContent = `Finish Date: ${resource.finishDate}`;
-  resourceElement.appendChild(finishDateElement);
+  resourceProps.forEach(([propName, className]) => {
+    const propElement = document.createElement("td");
+    propElement.classList.add(className);
+    propElement.textContent = resource[propName];
+    resourceRow.appendChild(propElement);
+  });
 
-  const notesElement = document.createElement("p");
-  notesElement.textContent = `Notes: ${resource.notes}`;
-  resourceElement.appendChild(notesElement);
+  const ratingElement = resource.getRatingInput();
+  const ratingCell = document.createElement("td");
+  ratingCell.appendChild(ratingElement);
+  resourceRow.appendChild(ratingCell);
 
-  const ratingInputElement = resource.getRatingInput();
-  resourceElement.appendChild(ratingInputElement);
-
-  return resourceElement;
+  return resourceRow;
 }
 
 // Sort Option For Different Categories
