@@ -1,80 +1,82 @@
 /* Global Styles */
-  ul {
-    list-style: none;
-  }
-  
-  body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-  }
+ul {
+  list-style: none;
+}
 
-  /* Header Navbar */
-  .site-header {
-    display: flex;
-    justify-content: space-around;
-    color: #fff;
-    padding: 1em;
-    margin: 8em 0 4em 0;
-    border: 2px red solid;
-  }
-  
-  .header__list {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .header__item {
-    margin: 0 2em;
-  }
-  
-  /* Main Section */
-  .site-main {
-    min-height: 100vh; 
+body {
+  display: flex;
+  flex-direction: column;
+}
 
-  }
+/* Header Navbar */
+.site-header {
+  display: flex;
+  justify-content: space-around;
+  color: #fff;
+  padding: 1em;
+  margin: 8em 0 4em 0;
+  border: 2px red solid;
+}
 
-  .main__nav {
-    text-align: center;
-  }
+.header__list {
+  display: flex;
+  justify-content: space-between;
+}
 
-  .main__list {
-    display: flex;
-    justify-content: space-between;
-    border: 2px red solid;
-    width: 90em;
-  }
-  
-  .main__item {
-    display: flex;
-  }
+.header__item {
+  margin: 0 2em;
+}
 
-  .main__item:nth-child(2) {
-    flex-grow: 4;
-  }
-  
-  .main__item:not(:nth-child(2)) {
-    flex-grow: 1;
-  }
-  
-  .main__link {
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-  }
- 
-  /* User Submit Option */
-  .resource-form {
-    display: flex;
-    flex-direction: column;
-    width: 20%;
-  }
+/* Main Section */
+.site-main {
+  min-height: 100vh;
+}
 
+.resource-section__title {
+  text-align: center;
+}
 
-  /* Footer */
-  .site-footer {
-    padding: 10px;
-    text-align: center;
-  }
-  
+.resource-list {
+  margin: auto;
+  text-align: center;
+}
+
+table {
+  width: 75%;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #dddddd;
+}
+
+/* User Submit Option */
+.resource-form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin-bottom: 2em;
+}
+
+.resource-form label {
+  margin-bottom: 0.5em;
+}
+
+.resource-form select,
+.resource-form input[type="date"],
+.resource-form textarea,
+.resource-form input[type="number"] {
+  margin-bottom: 1em;
+}
+
+/* Footer */
+.site-footer {
+  padding: 10px;
+  text-align: center;
+}
