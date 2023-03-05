@@ -44,6 +44,7 @@ body {
 }
 
 table {
+  border-collapse: collapse;
   width: 80%;
 }
 
@@ -83,6 +84,12 @@ th:nth-child(7) {
 .resource-form textarea,
 .resource-form input[type="number"] {
   margin-bottom: 1em;
+}
+
+/* // Resource Submission Display  */
+input[type="number"], button[type="submit"] {
+  border: none;
+  text-align: center;
 }
 
 /* Footer */
