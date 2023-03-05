@@ -162,6 +162,23 @@ function createResourceDisplay(resource, index) {
     propElement.classList.add(className);
     if (propName === "rating") {
       propElement.style.display = "none";
+    } else if (propName === "notes") {
+      if (resource[propName].length > 100) {
+        const truncatedNotes = resource[propName].slice(0, 45) + "...";
+        const truncatedNotesElem = document.createElement("span");
+        truncatedNotesElem.textContent = truncatedNotes;
+        truncatedNotesElem.classList.add("notes-truncated");
+        const fullNotesElem = document.createElement("div");
+        fullNotesElem.classList.add("notes-full");
+        fullNotesElem.textContent = resource[propName];
+        truncatedNotesElem.addEventListener("click", () => {
+          const win = window.open("", "Notes", "width=400,height=400");
+          win.document.body.appendChild(fullNotesElem);
+        });
+        propElement.appendChild(truncatedNotesElem);
+      } else {
+        propElement.textContent = resource[propName];
+      }
     } else {
       propElement.textContent = resource[propName];
     }
