@@ -40,10 +40,16 @@ function Resource(
   // Method to handle changes to resource rating
   this.handleRatingChange = function (event) {
     const newRating = parseInt(event.target.value);
-    if (isNaN(newRating) || newRating < 1 || newRating > 10) {
-      throw new Error("Invalid rating");
-    }
     this.rating = newRating;
+    let color;
+    if (this.rating >= 8) {
+      color = "green";
+    } else if (this.rating >= 4) {
+      color = "blue";
+    } else {
+      color = "orange";
+    }
+    event.target.style.color = color;
   };
 
   this.getRatingInput = function () {
@@ -59,12 +65,12 @@ function Resource(
     input.addEventListener("change", this.handleRatingChange);
 
     let color;
-    if (this.rating >= 7) {
+    if (this.rating >= 8) {
       color = "green";
-    } else if (this.rating >= 2) {
+    } else if (this.rating >= 4) {
       color = "blue";
     } else {
-      color = "yellow";
+      color = "orange";
     }
     input.style.color = color;
 
