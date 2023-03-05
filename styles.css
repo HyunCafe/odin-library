@@ -1,12 +1,19 @@
 /* Global Styles */
-ul {
-  list-style: none;
+
+@import url("https://fonts.googleapis.com/css2?family=Lora&display=swap");
+
+:root {
+  font-family: "Lora", serif;
 }
 
 body {
   display: flex;
   flex-direction: column;
   font-size: 1rem;
+}
+
+ul {
+  list-style: none;
 }
 
 /* Header Navbar */
@@ -36,6 +43,8 @@ body {
 
 .resource-section__title {
   text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1em;
 }
 
 .resource-list {
@@ -46,6 +55,7 @@ body {
 table {
   border-collapse: collapse;
   width: 80%;
+  box-shadow: 14px 14px 27px #bebebe, -14px -14px 27px #ffffff;
 }
 
 th,
@@ -53,10 +63,11 @@ td {
   border: 1px solid black;
   padding: 0.5em;
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 th {
-  background-color: #dddddd;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 th:nth-child(2) {
@@ -71,25 +82,31 @@ th:nth-child(7) {
 .resource-form {
   display: flex;
   flex-direction: column;
-  width: 15%;
+  align-items: center;
+  width: 14%;
   margin: 2em auto;
 }
 
-.resource-form label {
-  margin-bottom: 0.5em;
-}
-
+.resource-form label,
+.resource-form input,
 .resource-form select,
-.resource-form input[type="date"],
 .resource-form textarea,
-.resource-form input[type="number"] {
+.resource-form button {
+  font-family: "Lora", serif;
+  width: 100%;
+  box-sizing: border-box;
   margin-bottom: 1em;
 }
 
+button[type="submit"] {
+  width: 10em;
+}
+
 /* // Resource Submission Display  */
-input[type="number"], button[type="submit"] {
+input[type="number"] {
   border: none;
   text-align: center;
+  font-size: 1rem;
 }
 
 /* Footer */
