@@ -141,16 +141,15 @@ function createResourceDisplay(resource, index) {
   resourceRow.classList.add("resource-row");
   resourceRow.dataset.index = index;
 
-  const resourceProps = [
+  const resourceProps = [    ["rating", "rating"],
     ["resource", "resource"],
     ["category", "category"],
     ["status", "status"],
-    ["progress", "progress"],
     ["startDate", "start-date"],
-    ["finishDate", "finish-date"],
+    ["endDate", "end-date"],
     ["notes", "notes"],
   ];
-
+  
   resourceProps.forEach(([propName, className]) => {
     const propElement = document.createElement("td");
     propElement.classList.add(className);
