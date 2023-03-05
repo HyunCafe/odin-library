@@ -6,6 +6,7 @@ ul {
 body {
   display: flex;
   flex-direction: column;
+  font-size: 1rem;
 }
 
 /* Header Navbar */
@@ -14,8 +15,9 @@ body {
   justify-content: space-around;
   color: #fff;
   padding: 1em;
-  margin: 8em 0 4em 0;
+  margin: 6em auto;
   border: 2px red solid;
+  width: 40%;
 }
 
 .header__list {
@@ -42,13 +44,13 @@ body {
 }
 
 table {
-  width: 75%;
+  width: 80%;
 }
 
 th,
 td {
   border: 1px solid black;
-  padding: 8px;
+  padding: 0.5em;
   text-align: center;
 }
 
@@ -56,12 +58,20 @@ th {
   background-color: #dddddd;
 }
 
+th:nth-child(2) {
+  width: 30%;
+}
+
+th:nth-child(7) {
+  width: 20%;
+}
+
 /* User Submit Option */
 .resource-form {
   display: flex;
   flex-direction: column;
-  width: 90%;
-  margin-bottom: 2em;
+  width: 15%;
+  margin: 2em auto;
 }
 
 .resource-form label {
