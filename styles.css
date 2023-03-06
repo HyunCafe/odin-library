@@ -27,7 +27,6 @@ a {
   justify-content: space-around;
   padding: 1em;
   margin: 6em auto;
-
   width: 40%;
 }
 
@@ -36,15 +35,16 @@ a {
   justify-content: space-between;
 }
 
-.header__item {
+.header__item a{
   margin: 0 2em;
+  color: #486169;
+  font-weight: 600;
+  
 }
 
-/* Main Section */
-.site-main {
-  min-height: 100vh;
-}
 
+
+/* Top Navbar Section */
 .resource-list.header {
   color: #486169;
   font-weight: 600;
@@ -56,6 +56,8 @@ a {
   margin-bottom: 1em;
 }
 
+
+/* Top Navbar Section for Table */
 .resource-list thead tr {
   background-color: #d9f2fe;
   color: #ffffff;
@@ -81,15 +83,13 @@ td {
   text-align: center;
 }
 
-th {
-}
-
 tr.resource-row:nth-of-type(even) {
   background-color: #ecfbff;
 }
 
 tr.resource-row:nth-of-type(even) input {
   background-color: #ecfbff;
+
 }
 
 th:nth-child(2) {
