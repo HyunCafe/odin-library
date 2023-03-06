@@ -26,15 +26,15 @@
             <table class="resource-list">
               <thead>
                 <tr>
-                    <th><a class="resource-list" id="resource-rating" href="#">Rating</a></th>
-                    <th><a class="resource-list" id="resource-name" href="#">Resource</a></th>
-                    <th><a class="resource-list" id="resource-category" href="#">Category</a></th>
-                    <th><a class="resource-list" id="resource-status" href="#">Status</a></th>
-                    <th><a class="resource-list" id="resource-start-date" href="#">Start Date</a></th>
-                    <th><a class="resource-list" id="resource-end-date" href="#">End Date</a></th>
-                    <th><a class="resource-list" id="resource-notes" href="#">Notes</a></th>
-                    <th><a class="resource-list" id="resource-options" href="#">Options</a></th>     
-                </tr>
+                    <th><a class="resource-list header" id="resource-rating" href="#">Rating</a></th>
+                    <th><a class="resource-list header" id="resource-name" href="#">Resource</a></th>
+                    <th><a class="resource-list header" id="resource-category" href="#">Category</a></th>
+                    <th><a class="resource-list header"  id="resource-status" href="#">Status</a></th>
+                    <th><a class="resource-list header" id="resource-start-date" href="#">Start Date</a></th>
+                    <th><a class="resource-list header" id="resource-end-date" href="#">End Date</a></th>
+                    <th><a class="resource-list header" id="resource-notes" href="#">Notes</a></th>
+                    <th><a class="resource-list header" id="resource-options" href="#">Options</a></th>     
+                  </tr>                  
               </thead>
               <tbody class="resource-list__body">
                 <!-- resources will be added here -->
@@ -61,6 +61,7 @@
         <select id="status-input">
           <option value="Pending">Pending</option>
           <option value="In Progress">In Progress</option>
+          <option value="Hiatus">Hiatus</option>
           <option value="Completed">Completed</option>
         </select>
         <label for="start-date-input">Start Date:</label>

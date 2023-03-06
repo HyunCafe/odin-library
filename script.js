@@ -182,9 +182,9 @@ function createResourceDisplay(resource, index) {
           win.document.body.appendChild(fullNotesElem);
         });
         propElement.appendChild(truncatedNotesElem);
-      } else {
+     } else {
         propElement.textContent = resource[propName];
-      }
+      } 
     } else {
       propElement.textContent = resource[propName];
     }
@@ -201,7 +201,7 @@ const defaultResource = new Resource(
   "In Progress",
   "2022-12-15",
   "",
-  "No Hand Holding, Great Resource",
+  "Little hand holding, Great Resource",
   9
 );
 myLibrary.push(defaultResource);
