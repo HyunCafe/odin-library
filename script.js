@@ -37,7 +37,7 @@ function Resource(
     }
   };
 
-  // Method to handle changes to resource rating upon submission
+  // Method to handle changes to resource rating
   this.handleRatingChange = function (event) {
     const newRating = parseInt(event.target.value);
     this.rating = newRating;
@@ -52,7 +52,6 @@ function Resource(
     event.target.style.color = color;
   };
 
-// Method to handle changes to resource rating upon edit
   this.getRatingInput = function () {
     const div = document.createElement("div");
     div.classList.add("rating-bar");
@@ -137,34 +136,51 @@ submitBtn.addEventListener("click", (event) => {
     myLibrary.length - 1
   );
   resourceList.appendChild(resourceDisplay);
+
+  // reset form values
   form.reset();
 });
 
-// Resource display module
-function createResourceDisplay(resource, index, resourceProps) {
-  // Create resource row element
+// Create the resource display and populate it in correct columns
+function createResourceDisplay(resource, index) {
   const resourceRow = document.createElement("tr");
   resourceRow.classList.add("resource-row");
   resourceRow.dataset.index = index;
 
-  // Create rating element and cell
+  const resourceProps = [
+    ["rating", "rating"],
+    ["resource", "resource"],
+    ["category", "category"],
+    ["status", "status"],
+    ["startDate", "start-date"],
+    ["finishDate", "finish-date"],
+    ["notes", "notes"],
+    ["options", "options"],
+  ];
+
   const ratingElement = resource.getRatingInput();
   const ratingCell = document.createElement("td");
   ratingCell.appendChild(ratingElement);
-  ratingCell.style.display = "none";
   resourceRow.appendChild(ratingCell);
 
-  // Populate remaining properties based on passed array
   resourceProps.forEach(([propName, className]) => {
     const propElement = document.createElement("td");
     propElement.classList.add(className);
-    if (propName === "notes") {
+    if (propName === "rating") {
+      propElement.style.display = "none";
+    } else if (propName === "notes") {
       if (resource[propName].length > 100) {
-        const truncatedNotes = truncateNotes(resource[propName]);
-        const truncatedNotesElem = createTruncatedNotesElem(
-          truncatedNotes,
-          resource[propName]
-        );
+        const truncatedNotes = resource[propName].slice(0, 45) + "...";
+        const truncatedNotesElem = document.createElement("span");
+        truncatedNotesElem.textContent = truncatedNotes;
+        truncatedNotesElem.classList.add("notes-truncated");
+        const fullNotesElem = document.createElement("div");
+        fullNotesElem.classList.add("notes-full");
+        fullNotesElem.textContent = resource[propName];
+        truncatedNotesElem.addEventListener("click", () => {
+          const win = window.open("", "Notes", "width=400,height=400");
+          win.document.body.appendChild(fullNotesElem);
+        });
         propElement.appendChild(truncatedNotesElem);
       } else {
         propElement.textContent = resource[propName];
@@ -176,25 +192,6 @@ function createResourceDisplay(resource, index, resourceProps) {
   });
 
   return resourceRow;
-}
-
-// Truncation module
-function truncateNotes(notes) {
-  return notes.slice(0, 45) + "...";
-}
-
-function createTruncatedNotesElem(truncatedNotes, fullNotes) {
-  const truncatedNotesElem = document.createElement("span");
-  truncatedNotesElem.textContent = truncatedNotes;
-  truncatedNotesElem.classList.add("notes-truncated");
-  const fullNotesElem = document.createElement("div");
-  fullNotesElem.classList.add("notes-full");
-  fullNotesElem.textContent = fullNotes;
-  truncatedNotesElem.addEventListener("click", () => {
-    const win = window.open("", "Notes", "width=400,height=400");
-    win.document.body.appendChild(fullNotesElem);
-  });
-  return truncatedNotesElem;
 }
 
 // Add default test case
