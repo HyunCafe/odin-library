@@ -100,6 +100,18 @@ th:nth-child(7) {
   width: 20%;
 }
 
+/* Edit and Delete Material icons */
+td.options i:nth-child(1) {
+  margin-right: .25em;
+}
+
+td.options i:nth-child(2) {
+  margin-left: .25em;
+ 
+}
+
+
+
 /* User Submit Option */
 .resource-form {
   display: flex;

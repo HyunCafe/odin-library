@@ -74,7 +74,7 @@ function Resource(
     }
     input.style.color = color;
 
-    div.appendChild(input);
+    div.append(input);
     return div;
   };
 }
@@ -135,7 +135,7 @@ submitBtn.addEventListener("click", (event) => {
     newResource,
     myLibrary.length - 1
   );
-  resourceList.appendChild(resourceDisplay);
+  resourceList.append(resourceDisplay);
 
   // reset form values
   form.reset();
@@ -160,35 +160,62 @@ function createResourceDisplay(resource, index) {
 
   const ratingElement = resource.getRatingInput();
   const ratingCell = document.createElement("td");
-  ratingCell.appendChild(ratingElement);
-  resourceRow.appendChild(ratingCell);
+  ratingCell.append(ratingElement);
+  resourceRow.append(ratingCell);
 
   resourceProps.forEach(([propName, className]) => {
     const propElement = document.createElement("td");
     propElement.classList.add(className);
-    if (propName === "rating") {
-      propElement.style.display = "none";
-    } else if (propName === "notes") {
-      if (resource[propName].length > 100) {
-        const truncatedNotes = resource[propName].slice(0, 45) + "...";
-        const truncatedNotesElem = document.createElement("span");
-        truncatedNotesElem.textContent = truncatedNotes;
-        truncatedNotesElem.classList.add("notes-truncated");
-        const fullNotesElem = document.createElement("div");
-        fullNotesElem.classList.add("notes-full");
-        fullNotesElem.textContent = resource[propName];
-        truncatedNotesElem.addEventListener("click", () => {
-          const win = window.open("", "Notes", "width=400,height=400");
-          win.document.body.appendChild(fullNotesElem);
+    switch (propName) {
+      case "rating":
+        propElement.style.display = "none";
+        propElement.append(resource.getRatingInput());
+        break;
+      case "notes":
+        if (resource[propName].length > 100) {
+          const truncatedNotes = resource[propName].slice(0, 45) + "...";
+          const truncatedNotesElem = document.createElement("span");
+          truncatedNotesElem.textContent = truncatedNotes;
+          truncatedNotesElem.classList.add("notes-truncated");
+          const fullNotesElem = document.createElement("div");
+          fullNotesElem.classList.add("notes-full");
+          fullNotesElem.textContent = resource[propName];
+          truncatedNotesElem.addEventListener("click", () => {
+            const win = window.open("", "Notes", "width=400,height=400");
+            win.document.body.append(fullNotesElem);
+          });
+          propElement.append(truncatedNotesElem);
+        } else {
+          propElement.textContent = resource[propName];
+        }
+        break;
+      case "options":
+        const deleteIcon = document.createElement("i");
+        deleteIcon.classList.add("material-icons", "md-18", "md-dark");
+        deleteIcon.textContent = "delete";
+        deleteIcon.addEventListener("click", () => {
+          resourceList.removeChild(resourceRow);
+          myLibrary.splice(index, 1);
+          saveLibraryToLocalStorage();
         });
-        propElement.appendChild(truncatedNotesElem);
-      } else {
+        const editIcon = document.createElement("i");
+        editIcon.classList.add("material-icons", "md-18", "md-dark");
+        editIcon.textContent = "edit";
+        editIcon.addEventListener("click", () => {
+          const resourceInputs = resourceRow.querySelectorAll("td:not(.options)");
+          resourceInputs.forEach((input) => {
+            input.setAttribute("contenteditable", "true");
+            input.classList.add("editable");
+          });
+          ratingElement.style.display = "block";
+        });
+        propElement.append(editIcon);
+        propElement.append(deleteIcon);
+        break;
+      default:
         propElement.textContent = resource[propName];
-      }
-    } else {
-      propElement.textContent = resource[propName];
     }
-    resourceRow.appendChild(propElement);
+    resourceRow.append(propElement);
   });
 
   return resourceRow;
@@ -209,7 +236,7 @@ const defaultResourceDisplay = createResourceDisplay(
   defaultResource,
   myLibrary.length - 1
 );
-resourceList.appendChild(defaultResourceDisplay);
+resourceList.append(defaultResourceDisplay);
 
 // Sort Option For Different Categories
 
