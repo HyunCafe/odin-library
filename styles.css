@@ -21,27 +21,6 @@ a {
   text-decoration: none;
 }
 
-/* Header Navbar */
-.site-header {
-  display: flex;
-  justify-content: space-around;
-  padding: 1em;
-  margin: 6em auto;
-  width: 40%;
-}
-
-.header__list {
-  display: flex;
-  justify-content: space-between;
-}
-
-.header__item a{
-  margin: 0 2em;
-  color: #486169;
-  font-weight: 600;
-  
-}
-
 /* Top Navbar Section */
 .resource-list.header {
   color: #486169;
@@ -53,7 +32,6 @@ a {
   font-size: 2.5rem;
   margin-bottom: 1em;
 }
-
 
 /* Top Navbar Section for Table */
 .resource-list thead tr {
@@ -87,7 +65,6 @@ tr.resource-row:nth-of-type(even) {
 
 tr.resource-row:nth-of-type(even) input {
   background-color: #ecfbff;
-
 }
 
 th:nth-child(2) {
@@ -100,15 +77,12 @@ th:nth-child(7) {
 
 /* Edit and Delete Material icons */
 td.options i:nth-child(1) {
-  margin-right: .25em;
+  margin-right: 0.25em;
 }
 
 td.options i:nth-child(2) {
-  margin-left: .25em;
- 
+  margin-left: 0.25em;
 }
-
-
 
 /* User Submit Option */
 .resource-form {

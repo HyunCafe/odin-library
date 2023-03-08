@@ -202,7 +202,8 @@ function createResourceDisplay(resource, index) {
         editIcon.classList.add("material-icons", "md-18", "md-dark");
         editIcon.textContent = "edit";
         editIcon.addEventListener("click", () => {
-          const resourceInputs = resourceRow.querySelectorAll("td:not(.options)");
+          const resourceInputs =
+            resourceRow.querySelectorAll("td:not(.options)");
           resourceInputs.forEach((input) => {
             if (!input.classList.contains("editable")) {
               input.setAttribute("contenteditable", "true");
@@ -212,7 +213,7 @@ function createResourceDisplay(resource, index) {
             input.classList.toggle("editable");
           });
           ratingElement.style.display = "block";
-        });        
+        });
         propElement.append(editIcon);
         propElement.append(deleteIcon);
         break;
@@ -243,6 +244,6 @@ resourceList.append(defaultResourceDisplay);
 
 // Sort Option For Different Categories
 
-// Add required for certain inputs 
+// Add required for certain inputs
 
 // TODO: Add sorting and other resource library functionality
