@@ -42,8 +42,6 @@ a {
   
 }
 
-
-
 /* Top Navbar Section */
 .resource-list.header {
   color: #486169;
@@ -142,6 +140,10 @@ input[type="number"] {
   border: none;
   text-align: center;
   font-size: 1rem;
+}
+
+.editable {
+  background-color: rgb(255, 255, 138);
 }
 
 /* Footer */
