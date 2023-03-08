@@ -105,6 +105,27 @@ function saveLibraryToLocalStorage() {
   localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
 }
 
+// Toggle Resource form show, blur rest
+function addResourceFormShow(event) {
+  const addResourceBtn = document.querySelector(".add-resource-btn");
+  const resourceForm = document.querySelector(".resource-form");
+  const resourceSection = document.querySelector(".resource-section");
+
+  addResourceBtn.addEventListener("click", () => {
+    if (resourceForm.style.display === "none") {
+      resourceForm.style.display = "block";
+      resourceSection.style.filter = "blur(2px)";
+      document.body.style.transition = "all 0.3s ease-in-out";
+    } else {
+      resourceForm.style.display = "none";
+      resourceSection.style.filter = "";
+      document.body.style.transition = "all 0.3s ease-in-out";
+    }
+  });
+}
+addResourceFormShow();
+
+// Add Event Listener for Create Resource
 submitBtn.addEventListener("click", (event) => {
   event.preventDefault();
 
