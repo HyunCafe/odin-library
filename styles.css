@@ -11,6 +11,7 @@ body {
   display: flex;
   flex-direction: column;
   font-size: 1rem;
+  min-height: 100%;
 }
 
 ul {
@@ -21,7 +22,7 @@ a {
   text-decoration: none;
 }
 
-/* Top Navbar Section */
+/* Top Title */
 .resource-list.header {
   color: #486169;
   font-weight: 600;
@@ -35,6 +36,9 @@ a {
 }
 
 /* Top Navbar Section for Table */
+.main {
+  flex: 1;
+}
 .resource-list thead tr {
   background-color: #d9f2fe;
   color: #ffffff;
@@ -130,8 +134,33 @@ input[type="number"] {
   background-color: rgb(255, 255, 138);
 }
 
+/* Button Style */
+button {
+  padding: 0.5em;
+  margin: 0.5em;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  font-family: "Open Sans", sans-serif;
+  background-color: #f6fdff;
+  border-radius: 8px;
+}
+
+button:hover {
+  transform: scale(1.1);
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:active {
+  transform: scale(1);
+}
+.add-resource-btn {
+  position: absolute;
+  margin-top: 2em;
+  margin-left: 2em;
+}
+
 /* Footer */
 .site-footer {
+  margin-top: 1em;
   padding: 1em;
   text-align: center;
 }

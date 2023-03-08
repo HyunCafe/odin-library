@@ -106,7 +106,6 @@ function saveLibraryToLocalStorage() {
 }
 
 // Toggle Resource form show, blur rest
-// Toggle Resource form show, blur rest
 function addResourceFormShow(event) {
   const addResourceBtn = document.querySelector(".add-resource-btn");
   const resourceForm = document.querySelector(".resource-form");
