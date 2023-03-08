@@ -100,24 +100,6 @@ td.options i:nth-child(2) {
   display: none;
 }
 
-.login-form {
-  position: fixed;
-  top: 50%;
-  right: 20%;
-  transform: translate(50%, -50%);
-  width: 100%;
-  max-width: 500px;
-  height: 70%;
-  padding: 1.25em;
-  background-color: rgba(255, 255, 255, 0.2);
-  background-size: cover;
-  border-radius: 66% 34% 49% 51% / 39% 45% 55% 61%;
-  backdrop-filter: blur(2px);
-  box-shadow: 4px 4px 8px #ffffff, -4px -4px 8px #ffffff;
-  font-size: 1.2rem;
-  text-shadow: 2px 2px 5px rgb(21, 37, 78, 0.8);
-}
-
 .resource-form label,
 .resource-form input,
 .resource-form select,
