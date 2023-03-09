@@ -112,7 +112,7 @@ function addResourceFormShow(event) {
   const resourceSection = document.querySelector(".resource-section");
 
   addResourceBtn.addEventListener("click", () => {
-    if (resourceForm.style.display === "none") {
+    if (window.getComputedStyle(resourceForm).display === "none") {
       resourceForm.style.display = "block";
       resourceSection.style.filter = "blur(2px)";
       document.body.style.transition = "all 0.3s ease-in-out";
@@ -175,6 +175,8 @@ submitBtn.addEventListener("click", (event) => {
 
 // Create the resource display and populate it in correct columns
 function createResourceDisplay(resource, index) {
+  console.log("createResourceDisplay called with:", resource, index);
+
   const resourceRow = document.createElement("tr");
   resourceRow.classList.add("resource-row");
   resourceRow.dataset.index = index;
@@ -257,6 +259,42 @@ function createResourceDisplay(resource, index) {
   return resourceRow;
 }
 
+// Get all the header buttons and the table body
+const headerButtons = document.querySelectorAll(".resource-list.header");
+// Add click event listener to each button
+headerButtons.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    sortTable(index, button.getAttribute("data-direction") === "asc");
+    // Toggle sort direction
+    button.setAttribute(
+      "data-direction",
+      button.getAttribute("data-direction") === "asc" ? "desc" : "asc"
+    );
+  });
+});
+
+function sortTable(columnIndex, ascending) {
+  // Get the table body and rows
+  const tableBody = document.querySelector(".resource-list__body");
+  const rows = Array.from(tableBody.querySelectorAll(".resource-row"));
+  // Sort the rows based on the data in the specified column
+  rows.sort((a, b) => {
+    const aData = a.children[columnIndex].textContent;
+    const bData = b.children[columnIndex].textContent;
+    if (aData < bData) {
+      return ascending ? -1 : 1;
+    } else if (aData > bData) {
+      return ascending ? 1 : -1;
+    } else {
+      return 0;
+    }
+  });
+  // Move the sorted rows to their new positions in the table
+  rows.forEach((row) => {
+    tableBody.appendChild(row);
+  });
+}
+
 // Add default test case
 const defaultResource = new Resource(
   "The Odin Project",
@@ -273,6 +311,23 @@ const defaultResourceDisplay = createResourceDisplay(
   myLibrary.length - 1
 );
 resourceList.append(defaultResourceDisplay);
+
+// Add default test case 2
+const defaultResource2 = new Resource(
+  "FreeCodeCamp",
+  "Online Course",
+  "Hiatus",
+  "2022-02-15",
+  "2022-08-15",
+  "Awesome Resource but too much hand holding",
+  6
+);
+myLibrary.push(defaultResource2);
+const defaultResourceDisplay2 = createResourceDisplay(
+  defaultResource2,
+  myLibrary.length - 1
+);
+resourceList.append(defaultResourceDisplay2);
 
 // Sort Option For Different Categories
 
