@@ -26,6 +26,7 @@ function Resource(
     this.rating = rating || 0;
   }
 
+
 // Create Display of new rows
 const tableContent = document.getElementsByClassName("resource-list__body")[0];
 const tableHeaderButtons = document.querySelectorAll("th button");
@@ -53,7 +54,6 @@ const createNewRow = (resource, index) => {
     });
     return resourceRow;
 }
-
 
 // Add Event listener for perform the new submission for row creation
 const submitButton = document.querySelector('button[type="submit"]');
