@@ -330,3 +330,4 @@ resourceList.append(defaultResourceDisplay2);
 // Add required for certain inputs
 
 // TODO: Add sorting and other resource library functionality
+// Bug- bug with rating number sort order, as well as category, dates and options fix later
