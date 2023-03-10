@@ -82,7 +82,6 @@ function Resource(
 // Submit Form Logic
 const submitBtn = document.querySelector('button[type="submit"]');
 const form = document.querySelector(".resource-form");
-const resourceList = document.querySelector(".resource-list");
 
 function updateResourceFromForm(index) {
   const resourceContainer = document.querySelector(`[data-index="${index}"]`);
@@ -175,8 +174,6 @@ submitBtn.addEventListener("click", (event) => {
 
 // Create the resource display and populate it in correct columns
 function createResourceDisplay(resource, index) {
-  console.log("createResourceDisplay called with:", resource, index);
-
   const resourceRow = document.createElement("tr");
   resourceRow.classList.add("resource-row");
   resourceRow.dataset.index = index;
@@ -260,37 +257,36 @@ function createResourceDisplay(resource, index) {
 }
 
 // Get all the header buttons and the table body
-const headerButtons = document.querySelectorAll(".resource-list.header");
-// Add click event listener to each button
-headerButtons.forEach((button, index) => {
-  button.addEventListener("click", () => {
-    sortTable(index, button.getAttribute("data-direction") === "asc");
-    // Toggle sort direction
-    button.setAttribute(
-      "data-direction",
-      button.getAttribute("data-direction") === "asc" ? "desc" : "asc"
-    );
+const tableHeader = document.querySelector(".resource-list.header");
+const tableHeaderCells = Array.from(
+  document.querySelectorAll(".resource-list thead th")
+);
+const resourceList = document.querySelector(".resource-list tbody");
+
+tableHeaderCells.forEach((cell, index) => {
+  cell.addEventListener("click", () => {
+    sortTable(index);
   });
 });
 
-function sortTable(columnIndex, ascending) {
-  // Get the table body and rows
+function sortTable(columnIndex) {
   const tableBody = document.querySelector(".resource-list__body");
-  const rows = Array.from(tableBody.querySelectorAll(".resource-row"));
-  // Sort the rows based on the data in the specified column
-  rows.sort((a, b) => {
-    const aData = a.children[columnIndex].textContent;
-    const bData = b.children[columnIndex].textContent;
-    if (aData < bData) {
-      return ascending ? -1 : 1;
-    } else if (aData > bData) {
-      return ascending ? 1 : -1;
-    } else {
-      return 0;
+  const rows = Array.from(tableBody.querySelectorAll("tr"));
+
+  const sortedRows = rows.sort((a, b) => {
+    const cellA = a.children[columnIndex].textContent;
+    const cellB = b.children[columnIndex].textContent;
+
+    if (!isNaN(cellA) && !isNaN(cellB)) {
+      return parseFloat(cellA) > parseFloat(cellB) ? 1 : -1;
     }
+
+    return cellA > cellB ? 1 : -1;
   });
-  // Move the sorted rows to their new positions in the table
-  rows.forEach((row) => {
+
+  tableBody.textContent = "";
+
+  sortedRows.forEach((row) => {
     tableBody.appendChild(row);
   });
 }
