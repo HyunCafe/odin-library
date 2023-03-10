@@ -27,7 +27,7 @@ function Resource(
   }
 
 // Create Display of new rows
-const tableContent = document.getElementById("resource-list__body")
+const tableContent = document.getElementsByClassName("resource-list__body")[0];
 const tableHeaderButtons = document.querySelectorAll("th button");
 
 const createNewRow = (resource, index) => {
@@ -84,7 +84,7 @@ submitButton.addEventListener('click', (e) => {
     myLibrary.push(newResource);
     saveLibraryToLocalStorage();
     const newRow = createNewRow(newResource, myLibrary.length - 1);
-    tableContent.appendChild(newRow);
+    tableContent.append(newRow);
   
     // reset form values
     document.getElementById("resource-input").value = "";
@@ -96,6 +96,10 @@ submitButton.addEventListener('click', (e) => {
     document.getElementById("rating-input").value = "";
   });
 
+// Save to localStorage
+function saveLibraryToLocalStorage() {
+    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+  }
 
 
 // Toggle Resource form show, blur rest
