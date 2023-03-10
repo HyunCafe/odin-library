@@ -41,7 +41,7 @@ const createNewRow = (resource, index) => {
         ["category", "category"],
         ["status", "status"],
         ["startDate", "start-date"],
-        ["finishDate", "finish-date"],
+        ["endDate", "end-date"],
         ["notes", "notes"],
         ["options", "options"],
     ];
