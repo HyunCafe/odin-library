@@ -1,6 +1,6 @@
 "use strict";
 
-const myLibrary = [];
+let myLibrary = [];
 
 // Factory Function for Creating Resources
 function Resource(
@@ -98,6 +98,7 @@ const createNewRow = (resource, index) => {
   return createResourceRow;
 };
 
+// Get data and save to variable for referencing
 const getTableContent = (data) => {
   data.forEach((resource, index) => {
     const newRow = createNewRow(resource, index);
@@ -188,6 +189,25 @@ window.addEventListener("load", () => {
   });
 });
 
+// Load library from local storage on page load
+window.addEventListener("load", () => {
+  const storedLibrary = localStorage.getItem("myLibrary");
+  if (storedLibrary) {
+    myLibrary = JSON.parse(storedLibrary);
+    myLibrary.forEach((resource, index) => {
+      const newRow = createNewRow(resource, index);
+      tableContent.append(newRow);
+    });
+  } else {
+    myLibrary = [];
+  }
+});
+
+// Save library to local storage whenever it changes
+const saveLibraryToLocalStorage = () => {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+};
+
 // Add Event listener for perform the new submission for row creation
 const submitButton = document.querySelector('button[type="submit"]');
 
@@ -228,11 +248,6 @@ submitButton.addEventListener("click", (e) => {
   document.getElementById("notes-input").value = "";
   document.getElementById("rating-input").value = "";
 });
-
-// Save to localStorage
-function saveLibraryToLocalStorage() {
-  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
-}
 
 // Toggle Resource form show, blur rest
 function addResourceFormShow(event) {
