@@ -43,8 +43,57 @@ const createNewRow = (resource, index) => {
   resourceProps.forEach(([propName, className]) => {
     const propElement = document.createElement("td");
     propElement.classList.add(className);
-    propElement.textContent = resource[propName];
     createResourceRow.append(propElement);
+
+    switch (propName) {
+      case "notes":
+        if (resource[propName].length > 100) {
+          const truncatedNotes = resource[propName].slice(0, 45) + "...";
+          const truncatedNotesElem = document.createElement("span");
+          truncatedNotesElem.textContent = truncatedNotes;
+          truncatedNotesElem.classList.add("notes-truncated");
+          const fullNotesElem = document.createElement("div");
+          fullNotesElem.classList.add("notes-full");
+          fullNotesElem.textContent = resource[propName];
+          truncatedNotesElem.addEventListener("click", () => {
+            const win = window.open("", "Notes", "width=400,height=400");
+            win.document.body.append(fullNotesElem);
+          });
+          propElement.append(truncatedNotesElem);
+        } else {
+          propElement.textContent = resource[propName];
+        }
+        break;
+      case "options":
+        const deleteIcon = document.createElement("i");
+        deleteIcon.classList.add("material-icons", "md-18", "md-dark");
+        deleteIcon.textContent = "delete";
+        deleteIcon.addEventListener("click", () => {
+          tableContent.removeChild(createResourceRow);
+          myLibrary.splice(index, 1);
+          saveLibraryToLocalStorage();
+        });
+        const editIcon = document.createElement("i");
+        editIcon.classList.add("material-icons", "md-18", "md-dark");
+        editIcon.textContent = "edit";
+        editIcon.addEventListener("click", () => {
+          const resourceInputs =
+            createResourceRow.querySelectorAll("td:not(.options)");
+          resourceInputs.forEach((input) => {
+            if (!input.classList.contains("editable")) {
+              input.setAttribute("contenteditable", "true");
+            } else {
+              input.removeAttribute("contenteditable");
+            }
+            input.classList.toggle("editable");
+          });
+        });
+        propElement.append(editIcon);
+        propElement.append(deleteIcon);
+        break;
+      default:
+        propElement.textContent = resource[propName];
+    }
   });
   return createResourceRow;
 };
@@ -52,7 +101,7 @@ const createNewRow = (resource, index) => {
 const getTableContent = (data) => {
   data.forEach((resource, index) => {
     const newRow = createNewRow(resource, index);
-    tableContent.appendChild(newRow);
+    tableContent.append(newRow);
   });
 };
 
@@ -216,6 +265,7 @@ function addResourceFormShow(event) {
 }
 addResourceFormShow();
 
+// the two default resources
 const defaultResources = [
   {
     resource: "The Odin Project",
@@ -240,7 +290,7 @@ const defaultResources = [
 defaultResources.forEach((resource, index) => {
   myLibrary.push(resource);
   const newRow = createNewRow(resource, index);
-  tableContent.appendChild(newRow);
+  tableContent.append(newRow);
 });
 
 // Handle Rating change and color code
