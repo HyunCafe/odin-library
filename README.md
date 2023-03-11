@@ -32,7 +32,7 @@ Ability to view full notes in a separate window by clicking on truncated notes
 * Removal: Removed the URL option
 * Style: Improved aesthetics and adopted a monotone 
 
-#### Mar 6, 
+#### Mar 6, 23023
 
 * Style: Completed the initial layout structure and color theme
 * Refactor: Made logic more modular to improve code maintainability
@@ -40,13 +40,13 @@ Ability to view full notes in a separate window by clicking on truncated notes
 * Feature: Added material icons, edit and delete functionality with a working delete function
 * Fix: Corrected a typo in the code
 
-#### Mar 7, 
+#### Mar 7, 2023
 
 * Feature: Added an editable feature to highlight cell boxes and allow users to edit them
 * Refactor: Removed code that will not be used
 * Feature: Made resource form toggle-able and blurred the body on button click
 * Refactor: Simplified the form styling by removing the login form template from a past project
-* : Allowed the resource form to toggle by clicking anywhere outside of it
+* Allowed the resource form to toggle by clicking anywhere outside of it
 * Style: Improved button styling
 #### Mar 8, 2023
 
@@ -55,7 +55,7 @@ Ability to view full notes in a separate window by clicking on truncated notes
 
 #### Mar 9, 2023
 
-* : Improved the sort function to work as intended, except for dates and category
+* Improved the sort function to work as intended, except for dates and category
 * Documentation: Added bug comments for future reference and debugging
 
 #### Mar 10, 2023
