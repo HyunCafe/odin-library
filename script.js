@@ -3,100 +3,97 @@
 let myLibrary = [];
 
 // Factory Function for Creating Resources
-function Resource(
-  resource,
-  category,
-  status,
-  startDate,
-  endDate,
-  notes,
-  rating
-) {
-  this.resource = resource;
-  this.category = category;
-  this.status = status || STATUS.PENDING;
-  this.startDate = startDate || "";
-  this.endDate = endDate || "";
-  this.notes = notes || "";
-  this.rating = rating || 0;
+class Resource {
+  constructor(resource, category, status, startDate, endDate, notes, rating) {
+    this.resource = resource;
+    this.category = category;
+    this.status = status || STATUS.PENDING;
+    this.startDate = startDate || "";
+    this.endDate = endDate || "";
+    this.notes = notes || "";
+    this.rating = rating || 0;
+  }
 }
 
 // Create Display of new rows
 const tableContent = document.getElementsByClassName("resource-list__body")[0];
 const tableHeaderButtons = document.querySelectorAll("th button");
 
-const createNewRow = (resource, index) => {
-  const createResourceRow = document.createElement("tr");
-  createResourceRow.classList.add("resource-row");
-  createResourceRow.dataset.index = index;
+class ResourceRow {
+  constructor(resource, index) {
+    const createResourceRow = document.createElement("tr");
+    createResourceRow.classList.add("resource-row");
+    createResourceRow.dataset.index = index;
 
-  const resourceProps = [
-    ["rating", "rating"],
-    ["resource", "resource"],
-    ["category", "category"],
-    ["status", "status"],
-    ["startDate", "start-date"],
-    ["endDate", "end-date"],
-    ["notes", "notes"],
-    ["options", "options"],
-  ];
-  resourceProps.forEach(([propName, className]) => {
-    const propElement = document.createElement("td");
-    propElement.classList.add(className);
-    createResourceRow.append(propElement);
+    const resourceProps = [
+      ["rating", "rating"],
+      ["resource", "resource"],
+      ["category", "category"],
+      ["status", "status"],
+      ["startDate", "start-date"],
+      ["endDate", "end-date"],
+      ["notes", "notes"],
+      ["options", "options"],
+    ];
 
-    switch (propName) {
-      case "notes":
-        if (resource[propName].length > 100) {
-          const truncatedNotes = resource[propName].slice(0, 45) + "...";
-          const truncatedNotesElem = document.createElement("span");
-          truncatedNotesElem.textContent = truncatedNotes;
-          truncatedNotesElem.classList.add("notes-truncated");
-          const fullNotesElem = document.createElement("div");
-          fullNotesElem.classList.add("notes-full");
-          fullNotesElem.textContent = resource[propName];
-          truncatedNotesElem.addEventListener("click", () => {
-            const win = window.open("", "Notes", "width=400,height=400");
-            win.document.body.append(fullNotesElem);
+    resourceProps.forEach(([propName, className]) => {
+      const propElement = document.createElement("td");
+      propElement.classList.add(className);
+      createResourceRow.append(propElement);
+
+      switch (propName) {
+        case "notes":
+          if (resource[propName].length > 100) {
+            const truncatedNotes = resource[propName].slice(0, 45) + "...";
+            const truncatedNotesElem = document.createElement("span");
+            truncatedNotesElem.textContent = truncatedNotes;
+            truncatedNotesElem.classList.add("notes-truncated");
+            const fullNotesElem = document.createElement("div");
+            fullNotesElem.classList.add("notes-full");
+            fullNotesElem.textContent = resource[propName];
+            truncatedNotesElem.addEventListener("click", () => {
+              const win = window.open("", "Notes", "width=400,height=400");
+              win.document.body.append(fullNotesElem);
+            });
+            propElement.append(truncatedNotesElem);
+          } else {
+            propElement.textContent = resource[propName];
+          }
+          break;
+        case "options":
+          const deleteIcon = document.createElement("i");
+          deleteIcon.classList.add("material-icons", "md-18", "md-dark");
+          deleteIcon.textContent = "delete";
+          deleteIcon.addEventListener("click", () => {
+            tableContent.removeChild(createResourceRow);
+            myLibrary.splice(index, 1);
+            saveLibraryToLocalStorage();
           });
-          propElement.append(truncatedNotesElem);
-        } else {
+          const editIcon = document.createElement("i");
+          editIcon.classList.add("material-icons", "md-18", "md-dark");
+          editIcon.textContent = "edit";
+          editIcon.addEventListener("click", () => {
+            const resourceInputs =
+              createResourceRow.querySelectorAll("td:not(.options)");
+            resourceInputs.forEach((input) => {
+              if (!input.classList.contains("editable")) {
+                input.setAttribute("contenteditable", "true");
+              } else {
+                input.removeAttribute("contenteditable");
+              }
+              input.classList.toggle("editable");
+            });
+          });
+          propElement.append(editIcon);
+          propElement.append(deleteIcon);
+          break;
+        default:
           propElement.textContent = resource[propName];
-        }
-        break;
-      case "options":
-        const deleteIcon = document.createElement("i");
-        deleteIcon.classList.add("material-icons", "md-18", "md-dark");
-        deleteIcon.textContent = "delete";
-        deleteIcon.addEventListener("click", () => {
-          tableContent.removeChild(createResourceRow);
-          myLibrary.splice(index, 1);
-          saveLibraryToLocalStorage();
-        });
-        const editIcon = document.createElement("i");
-        editIcon.classList.add("material-icons", "md-18", "md-dark");
-        editIcon.textContent = "edit";
-        editIcon.addEventListener("click", () => {
-          const resourceInputs =
-            createResourceRow.querySelectorAll("td:not(.options)");
-          resourceInputs.forEach((input) => {
-            if (!input.classList.contains("editable")) {
-              input.setAttribute("contenteditable", "true");
-            } else {
-              input.removeAttribute("contenteditable");
-            }
-            input.classList.toggle("editable");
-          });
-        });
-        propElement.append(editIcon);
-        propElement.append(deleteIcon);
-        break;
-      default:
-        propElement.textContent = resource[propName];
-    }
-  });
-  return createResourceRow;
-};
+      }
+    });
+    return createResourceRow;
+  }
+}
 
 // Get data and save to variable for referencing
 const getTableContent = (data) => {
@@ -304,7 +301,7 @@ const defaultResources = [
 
 defaultResources.forEach((resource, index) => {
   myLibrary.push(resource);
-  const newRow = createNewRow(resource, index);
+  const newRow = new ResourceRow(resource, index);
   tableContent.append(newRow);
 });
 
