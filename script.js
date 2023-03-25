@@ -186,25 +186,6 @@ window.addEventListener("load", () => {
   });
 });
 
-// Load library from local storage on page load
-window.addEventListener("load", () => {
-  const storedLibrary = localStorage.getItem("myLibrary");
-  if (storedLibrary) {
-    myLibrary = JSON.parse(storedLibrary);
-    myLibrary.forEach((resource, index) => {
-      const newRow = new ResourceRow(resource, index);
-      tableContent.append(newRow);
-    });
-  } else {
-    myLibrary = [];
-  }
-});
-
-// Save library to local storage whenever it changes
-const saveLibraryToLocalStorage = () => {
-  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
-};
-
 // Add Event listener for perform the new submission for row creation
 const submitButton = document.querySelector('button[type="submit"]');
 
@@ -277,7 +258,43 @@ function addResourceFormShow(event) {
 }
 addResourceFormShow();
 
-// the two default resources
+// Load library from local storage on page load
+window.addEventListener("load", () => {
+  const storedLibrary = localStorage.getItem("myLibrary");
+  if (storedLibrary) {
+    myLibrary = JSON.parse(storedLibrary);
+  } else {
+    myLibrary = [];
+  }
+
+  const resourceExists = (resourceName) => {
+    return myLibrary.some((resource) => resource.resource === resourceName);
+  };
+
+  // Check if the library is empty or does not exist, then add default resources
+  if (!resourceExists("The Odin Project") || !resourceExists("FreeCodeCamp")) {
+    defaultResources.forEach((resource) => {
+      if (!resourceExists(resource.resource)) {
+        myLibrary.push(resource);
+      }
+    });
+    // Save the updated library to local storage
+    saveLibraryToLocalStorage();
+  }
+
+  // Render the library
+  myLibrary.forEach((resource, index) => {
+    const newRow = new ResourceRow(resource, index);
+    tableContent.append(newRow);
+  });
+});
+
+// Save library to local storage whenever it changes
+const saveLibraryToLocalStorage = () => {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+};
+
+// The two default resources
 const defaultResources = [
   {
     resource: "The Odin Project",
@@ -299,11 +316,4 @@ const defaultResources = [
   },
 ];
 
-defaultResources.forEach((resource, index) => {
-  myLibrary.push(resource);
-  const newRow = new ResourceRow(resource, index);
-  tableContent.append(newRow);
-});
-
 // Handle Rating change and color code
-// Bug, Fix bug where it only deletes one resource at a time even if you select multiple
