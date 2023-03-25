@@ -181,3 +181,37 @@ button:active {
   padding: 1em;
   text-align: center;
 }
+
+/* Media Break Points */
+
+@media (max-width: 1550px) {
+  body {
+    font-size: .7rem;
+  }
+}
+
+
+@media (max-width: 600px) {
+  body {
+    font-size: .6rem;
+    /* height: 100vh; */
+  }
+
+  .resource-list.header {
+    font-size: .7rem;
+  }
+
+  td.options i:nth-child(1) {
+    font-size: 1rem;
+  }
+
+  td.options i:nth-child(2) {
+    font-size: 1rem;
+  }
+
+ .add-resource-btn {
+    width: 7em;
+    font-size: .7rem;
+  }
+
+}
