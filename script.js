@@ -98,7 +98,7 @@ class ResourceRow {
 // Get data and save to variable for referencing
 const getTableContent = (data) => {
   data.forEach((resource, index) => {
-    const newRow = createNewRow(resource, index);
+    const newRow = new ResourceRow(resource, index);
     tableContent.append(newRow);
   });
 };
@@ -192,7 +192,7 @@ window.addEventListener("load", () => {
   if (storedLibrary) {
     myLibrary = JSON.parse(storedLibrary);
     myLibrary.forEach((resource, index) => {
-      const newRow = createNewRow(resource, index);
+      const newRow = new ResourceRow(resource, index);
       tableContent.append(newRow);
     });
   } else {
@@ -306,3 +306,4 @@ defaultResources.forEach((resource, index) => {
 });
 
 // Handle Rating change and color code
+// Bug, Fix bug where it only deletes one resource at a time even if you select multiple
