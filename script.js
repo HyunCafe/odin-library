@@ -233,7 +233,7 @@ submitButton.addEventListener("click", (e) => {
   // add Resource object to myLibrary array and update display
   myLibrary.push(newResource);
   saveLibraryToLocalStorage();
-  const newRow = createNewRow(newResource, myLibrary.length - 1);
+  const newRow = new ResourceRow(newResource, myLibrary.length - 1);
   tableContent.append(newRow);
 
   // reset form values
