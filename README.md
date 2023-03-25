@@ -1,4 +1,4 @@
-# odin-library
+# odin-library (11 weeks into my coding journey)
 I approached the Odin Library project by first laying out the desired table format and aesthetics. I then added the ability to create, display, and manipulate resources in the table format, including adding, editing, and deleting resources. I also implemented a feature to toggle the resource form and view full notes in a separate window. Throughout the project, I continued to simplify and improve the code by refactoring and fixing bugs. By the end, I successfully optimized the sorting feature, improved the edit and delete functionality, and resolved issues with local storage saving. Overall, this project allowed me to grow my skills in HTML, CSS, and JavaScript, particularly in creating dynamic displays and manipulating data.
 
 
