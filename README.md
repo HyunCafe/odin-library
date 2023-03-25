@@ -11,6 +11,10 @@ Ability to add, edit, and delete resources
 Show/hide resource form with blur effect
 Ability to view full notes in a separate window by clicking on truncated notes
 
+![Project Animation](assets/library.gif)
+<p align="center">
+<a href="https://hyuncafe.github.io/odin-library/" target="_blank">Live Link</a>
+</p>
 
 ## Project Timeline
 
