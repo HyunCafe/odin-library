@@ -3,13 +3,13 @@ I approached the Odin Library project by first laying out the desired table form
 
 
 ### Summary of Key Features:
-Factory function for creating resources
-Dynamic display of resources in a table format
-Sorting of resources by different columns
-Saving and loading of resources from local storage
-Ability to add, edit, and delete resources
-Show/hide resource form with blur effect
-Ability to view full notes in a separate window by clicking on truncated notes
+* Factory function for creating resources
+* Dynamic display of resources in a table format
+* Sorting of resources by different columns
+* Saving and loading of resources from local storage
+* Ability to add, edit, and delete resources
+* Show/hide resource form with blur effect
+* Ability to view full notes in a separate window by clicking on truncated notes
 
 ![Project Animation](library.gif)
 <p align="center">
