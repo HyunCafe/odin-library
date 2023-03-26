@@ -186,19 +186,38 @@ button:active {
 
 @media (max-width: 1550px) {
   body {
-    font-size: .7rem;
+    font-size: 0.7rem;
+  }
+
+  .resource-form {
+    display: none;
+    width: 18%;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    padding: 2em;
+    transform: translate(50%, -50%);
+    background: #f6fdff;
+    box-shadow: 30px 30px 40px #acb1b3, -30px -30px 40px #acb1b3;
   }
 }
 
+@media (max-width: 1250px) {
+  .resource-form {
+    width: 25%;
+  }
+}
 
-@media (max-width: 600px) {
+@media (max-width: 770px) {
   body {
-    font-size: .6rem;
+    font-size: 0.6rem;
     /* height: 100vh; */
   }
-
+  .resource-form {
+    width: 60%;
+  }
   .resource-list.header {
-    font-size: .7rem;
+    font-size: 0.7rem;
   }
 
   td.options i:nth-child(1) {
@@ -209,9 +228,8 @@ button:active {
     font-size: 1rem;
   }
 
- .add-resource-btn {
+  .add-resource-btn {
     width: 7em;
-    font-size: .7rem;
+    font-size: 0.7rem;
   }
-
 }
