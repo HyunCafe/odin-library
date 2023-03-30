@@ -78,3 +78,5 @@ I approached the Odin Library project by first laying out the desired table form
 
 
 TODO: Add color coded rating, make it more semantic, add more aesthetic features, and create validations and requirements for form input
+- Make better aesthetics for form validations
+- Fix ability to delete more then one item at a time

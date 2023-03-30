@@ -1,47 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Odin Resource Project</title>
-    <meta name="description" content="Description of the page for search engines">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <meta
+      name="description"
+      content="Description of the page for search engines"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
+  <body>
     <main>
-        <section class="resource-section">
-            <h1 class="resource-section__title">Resource Library 
-              <button class="add-resource-btn" type="button">Add Resource</button>
-            </h1>
-            <div class="resource-list-container">
-              <table class="resource-list">
-              <thead>
-                <tr>
-                    <th><button class="resource-list header" id="resource-rating" >Rating</button></th>
-                    <th><button class="resource-list header" id="resource-name" >Resource</button></th>
-                    <th><button class="resource-list header" id="resource-category" >Category</button></th>
-                    <th><button class="resource-list header" id="resource-status" >Status</button></th>
-                    <th><button class="resource-list header" id="resource-start-date" >Start Date</button></th>
-                    <th><button class="resource-list header" id="resource-end-date" >End Date</button></th>
-                    <th><button class="resource-list header" id="resource-notes" >Notes</button></th>
-                    <th><button class="resource-list header" id="resource-options" >Options</button></th>
-                  </tr>  
-              </thead>
-              <tbody class="resource-list__body">
-                <!-- resources will be added here -->
-              </tbody>
-            </table>
-          </div>
-        </section>
+      <section class="resource-section">
+        <h1 class="resource-section__title">
+          Resource Library
+          <button class="add-resource-btn" type="button">Add Resource</button>
+        </h1>
+        <div class="resource-list-container">
+          <table class="resource-list">
+            <thead>
+              <tr>
+                <th>
+                  <button class="resource-list header" id="resource-rating">
+                    Rating
+                  </button>
+                </th>
+                <th>
+                  <button class="resource-list header" id="resource-name">
+                    Resource
+                  </button>
+                </th>
+                <th>
+                  <button class="resource-list header" id="resource-category">
+                    Category
+                  </button>
+                </th>
+                <th>
+                  <button class="resource-list header" id="resource-status">
+                    Status
+                  </button>
+                </th>
+                <th>
+                  <button class="resource-list header" id="resource-start-date">
+                    Start Date
+                  </button>
+                </th>
+                <th>
+                  <button class="resource-list header" id="resource-end-date">
+                    End Date
+                  </button>
+                </th>
+                <th>
+                  <button class="resource-list header" id="resource-notes">
+                    Notes
+                  </button>
+                </th>
+                <th>
+                  <button class="resource-list header" id="resource-options">
+                    Options
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="resource-list__body">
+              <!-- resources will be added here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <form class="resource-form">
         <label for="resource-input">Enter Resource:</label>
-        <input type="text" id="resource-input" name="resource" required>
+        <input type="text" id="resource-input" name="resource" required />
+        <div class="form-error" id="resource-error"></div>
+
         <label for="category-input">Category:</label>
-        <select id="category-input">
+        <select id="category-input" required>
           <option value="">Select a category</option>
           <option value="Online Course">Online Courses</option>
           <option value="Cheat Sheet">Cheat Sheets</option>
@@ -50,30 +94,47 @@
           <option value="Video">Video</option>
           <option value="Other">Other</option>
         </select>
+        <div class="form-error" id="category-error"></div>
+
         <label for="status-input">Status:</label>
-        <select id="status-input">
+        <select id="status-input" required>
+          <option value="">Select a status</option>
           <option value="Pending">Pending</option>
           <option value="In Progress">In Progress</option>
           <option value="Hiatus">Hiatus</option>
           <option value="Completed">Completed</option>
         </select>
+        <div class="form-error" id="status-error"></div>
+
         <label for="start-date-input">Start Date:</label>
-        <input type="date" id="start-date-input" name="start-date">
+        <input type="date" id="start-date-input" name="start-date" />
+
         <label for="end-date-input">End Date:</label>
-        <input type="date" id="end-date-input" name="end-date">
+        <input type="date" id="end-date-input" name="end-date" />
+
         <label for="notes-input">Notes:</label>
         <textarea id="notes-input" name="notes"></textarea>
+
         <label for="rating-input">Rating:</label>
-        <input type="number" id="rating-input" name="rating" min="1" max="10" placeholder="Rating from 1-10">
+        <input
+          type="number"
+          id="rating-input"
+          name="rating"
+          min="1"
+          max="10"
+          placeholder="Rating from 1-10"
+        />
+        <div class="form-error" id="rating-error"></div>
+
         <button type="submit">Add Resource</button>
-      </form>     
+      </form>
     </main>
 
     <!-- will add recycle and restore bin -->
 
     <footer class="site-footer">
-       <p>Github HyunCafe</p>
+      <p>Github HyunCafe</p>
     </footer>
     <script src="script.js" defer></script>
-</body>
+  </body>
 </html>

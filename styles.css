@@ -140,6 +140,23 @@ button[type="submit"] {
 #rating-input {
   border: rgb(97, 96, 96) 1px solid;
 }
+
+/* Form Validation Styles */
+/* Add a red border to required fields when they are not filled in */
+.resource-form input[required],
+.resource-form select[required],
+.resource-form textarea[required] {
+  border: 1px solid red;
+}
+
+/* Show error messages below invalid fields */
+.resource-form input[required]:invalid + span,
+.resource-form select[required]:invalid + span,
+.resource-form textarea[required]:invalid + span {
+  display: block;
+  color: red;
+}
+
 /* // Resource Submission Display  */
 input[type="number"] {
   border: none;
